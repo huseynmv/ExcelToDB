@@ -16,10 +16,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # df = pd.read_excel(file, sheet_name='Sheet1')
 # df
 
-# df = pd.read_excel('pragmatech.xlsx')
-# print(df.head())
 
-# engine = create_engine("sqlite:///data.db", echo=False)
 
 @app.route("/salam")
 def salam():
@@ -30,6 +27,10 @@ def func():
         file = request.files['file']
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        df = pd.read_excel(file)
+        print(df.head())
+        engine = create_engine("sqlite:///data.db", echo=False)
+        df.to_sql('poeple', con=engine, if_exists="append", index=False)
         return redirect('/')
     return render_template("index.html")
     

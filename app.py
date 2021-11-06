@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 app=Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.secret_key = b'_4#y2L"F4Q8z\n\xec]/'
 # file = 'pragmatech.xlsx'
 # output = 'output.xlsx'
 

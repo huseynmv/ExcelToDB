@@ -29,8 +29,6 @@ def func():
     return render_template("index.html")
 
 
-
-
 @app.route("/converttoexcel",methods=["GET","POST"])
 def converttoexcel():
     if request.method=="POST":

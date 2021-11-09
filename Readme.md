@@ -14,6 +14,10 @@ https://www.dataquest.io/blog/excel-and-pandas/
 
 https://pypi.org/project/Flask/
 
+https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_excel.html
+
+https://pandas.pydata.org/docs/reference/api/pandas.ExcelWriter.html
+
 
 ## Packages 
 
@@ -34,3 +38,4 @@ https://pypi.org/project/Flask/
 * SQLAlchemy==1.4.26
 * Werkzeug==2.0.2
 * xlrd==2.0.1
+* XlsxWriter==3.0.2

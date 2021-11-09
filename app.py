@@ -25,11 +25,41 @@ def func():
             sql_tables = sheet_name
             df = pd.read_excel(file,sheet_name=sheet_name, index_col=None)
             df.to_sql(sql_tables, con=engine, if_exists="append", index=False)
-        return redirect('/')
+        return redirect('/converttoexcel')
     return render_template("index.html")
+
+
+
+
+@app.route("/converttoexcel",methods=["GET","POST"])
+def converttoexcel():
+    if request.method=="POST":
+        conn=sqlite3.connect("data.db")
+        filePath = "modified.xlsx"
+        conn = sqlite3.connect('data.db')
+        writer = pd.ExcelWriter(filePath, engine='xlsxwriter')
+
+        df= pd.read_sql("SELECT name FROM sqlite_master WHERE type='table'", conn)
+
+        print(df['name'])
+
+        for table_name in df['name']:
+            sheet_name = table_name
+
+            SQL = "select * from " + sheet_name
+
+            dft = pd.read_sql(SQL, conn)
+
+            print(dft)
+
+            dft.to_excel(writer, sheet_name=sheet_name, index=False)
+        writer.save() 
+        
+        return redirect('/converttoexcel')
     
+    return render_template('converttoexcel.html')
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
